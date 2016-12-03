@@ -1,0 +1,96 @@
+        System.out.println("################### Primeira Rainha: ");
+        inserirRainha(q1, matrizPosicoes);
+        lerTabuleiro(matrizPosicoes);
+        
+        System.out.println("################### Colocando Linhas Colunas e Diagonais");
+        
+        verificaColuna(q1);
+        verificaLinha(q1);
+        verificaDiagonal1(q1);
+        verificaDiagonal2(q1);
+              
+        lerTabuleiro(matrizPosicoes);
+        
+        System.out.println("################### Coloca 2 no antigo lugar de q1 #########################");
+        
+        apagaQueenTabuleiro(q1);
+        
+        
+        System.out.println("################## Troca matrizPosicoes por matrizTemp #########################");
+        copiarMatriz(matrizTemp, matrizPosicoes);
+        lerTabuleiro(matrizPosicoes);
+        System.out.println("FIM-TEMP2");
+        
+        System.out.println("##################lerTabuleiro(matrizPosicoes);#########################");
+        lerTabuleiro(matrizPosicoes);
+        System.out.println("#################FIM###lerTabuleiro(matrizPosicoes);#######################");
+        
+        inserirRainha(q1, matrizPosicoes);
+        
+        lerTabuleiro(matrizPosicoes);
+        
+        
+        System.out.println("###########################################");
+        
+        
+
+        
+        
+
+        System.out.println("Segunda Rainha: ");
+        inserirRainha(bruno, matrizTemp);
+        lerTabuleiro(matrizPosicoes);
+        verificaColuna(bruno);
+        verificaLinha(bruno);
+        verificaDiagonal1(bruno);
+        verificaDiagonal2(bruno);
+
+        System.out.println("Terceira Rainha: ");
+        lerTabuleiro(matrizPosicoes);
+        inserirRainha(miguel, matrizTemp);
+        System.out.println();
+        lerTabuleiro(matrizPosicoes);
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        int l = 0;
+//        int c = 0;
+//
+//        try {
+//            for(c = 0; c < matriz.length; c++){
+//                if (matriz[l][c] != 0 && c <= matriz.length) {
+//                    for(l = 0; l < matriz.length; ) {
+//                        if (matriz[l][c] != 0 && c <= matriz.length) {
+//                            l++; 
+//                        }
+//                        q.setLinha(l);
+//                        q.setColuna(c);
+//                        matriz[l][c] = 1;
+//                    }
+//                    c++;
+//                }
+//                q.setLinha(l);
+//                q.setColuna(c);
+//                matriz[l][c] = 1;
+//            }
+//        
+// 
+//            
+//            q.setLinha(l);
+//            q.setColuna(c);
+//            matriz[l][c] = 1;
+//
+//        } catch (ArrayIndexOutOfBoundsException e) {
+//            verAnterior(c);
+//            System.out.println("ERROU");
+//        }

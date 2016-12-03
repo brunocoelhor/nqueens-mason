@@ -15,6 +15,8 @@ public class Environment extends SimState {
     public static Queen bruno = new Queen();
     public static Queen miguel = new Queen();
     public static Queen q1 = new Queen();
+    public static Queen q2 = new Queen();
+    public static Queen q3 = new Queen();
 
     public Environment(long seed) { //The constructor method
         super(seed);
@@ -47,41 +49,14 @@ public class Environment extends SimState {
     }
 
     public static void main(String[] args) {
-        System.out.println("Primeira Rainha: ");
-        q1.setLinha(0);
-        q1.setColuna(0);
-        matrizPosicoes[0][0] = 1;
-        lerTabuleiro(matrizPosicoes);
+        insercaoBase(q1, matrizPosicoes, matrizTemp);
+        insercaoBase(q2, matrizPosicoes, matrizTemp);
+        insercaoBase(q3, matrizPosicoes, matrizTemp);
         
-        percorreColuna(q1);
-        System.out.println(q1.getColunaAntiga());
-        
-        verificaColuna(q1.getColuna());
-        verificaLinha(q1.getLinha());
-        verificaDiagonel1(q1.getLinha(), q1.getColuna());
-        verificaDiagonel2(q1.getLinha(), q1.getColuna());
-           
-//        System.out.println("TEMP2");
-//        copiarTabuleiro(matrizPosicoes, matrizTemp);
-//        System.out.println("FIM-TEMP2");
         
         
 
-        System.out.println("Segunda Rainha: ");
-        inserirRainha(bruno);
-        lerTabuleiro(matrizPosicoes);
-        verificaColuna(1);
-        verificaLinha(2);
-        verificaDiagonel1(2, 1);
-        verificaDiagonel2(2, 1);
         
-        
-
-        System.out.println("Terceira Rainha: ");
-        lerTabuleiro(matrizPosicoes);
-        inserirRainha(miguel);
-        System.out.println();
-        lerTabuleiro(matrizPosicoes);
         
         
        
@@ -102,7 +77,8 @@ public class Environment extends SimState {
 
     }
 
-    public static void verificaColuna(int c) {
+    public static void verificaColuna(Queen q) {
+        int c = q.getColuna();
         for (int l = 0; l < matrizPosicoes.length; l++) {
             if (matrizPosicoes[l][c] != 1) {
                 matrizPosicoes[l][c] = 2;
@@ -110,7 +86,8 @@ public class Environment extends SimState {
         }
     }
 
-    public static void verificaLinha(int l) {
+    public static void verificaLinha(Queen q) {
+        int l = q.getLinha();
         for (int c = 0; c < matrizPosicoes.length; c++) {
             if (matrizPosicoes[l][c] != 1) {
                 matrizPosicoes[l][c] = 2;
@@ -118,7 +95,9 @@ public class Environment extends SimState {
         }
     }
 
-    public static void verificaDiagonel1(int l, int c) {
+    public static void verificaDiagonal1(Queen q) {
+        int l = q.getLinha();
+        int c = q.getColuna();
         try {
             for (int i = l; i < matrizPosicoes.length; i++) {
                 if (matrizPosicoes[l][c] != 1) {
@@ -128,11 +107,13 @@ public class Environment extends SimState {
                 c++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            //System.out.println("FUUUUUUUUUUU");
+
         }
     }
 
-    public static void verificaDiagonel2(int l, int c) {
+    public static void verificaDiagonal2(Queen q) {
+        int l = q.getLinha();
+        int c = q.getColuna();
         try {
             for (int i = l; i < matrizPosicoes.length; i++) {
                 if (matrizPosicoes[l][c] != 1) {
@@ -142,7 +123,7 @@ public class Environment extends SimState {
                 c++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            //System.out.println("FUUUUUUUUUUU");
+            
         }
 
     }
@@ -159,30 +140,31 @@ public class Environment extends SimState {
         }
     }
 
-    public static void inserirRainha(Queen q) {
+    public static void inserirRainha(Queen q, int matriz[][]) {
         int l = 0;
         int c = 0;
+        System.out.println(q.getLinha());
+        System.out.println(q.getColuna());
 
         try {
-            while (matrizPosicoes[l][c] != 0 && matrizPosicoes[l][c] < matrizPosicoes.length) {
-                c++;
-                while (matrizPosicoes[l][c] != 0 && matrizPosicoes[l][c] < matrizPosicoes.length) {
+            while (matriz[l][c] != 0 && c < matriz.length-1) {
+                if(q.getLinha() != 0 && q.getColuna() != 0 ){
+                    break;
+                }
+                while (matriz[l][c] != 0 && l < matriz.length-1) {
                     l++;
                 }
+                
+                c++;
+                l = 0;
             }
-            //System.out.println("L= " + l + " C = " + c);
-
             q.setLinha(l);
             q.setColuna(c);
-            matrizPosicoes[l][c] = 1;
+            matriz[l][c] = 1;
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            //System.out.println("L= " + l + " C = " + c);
-
-            //zeraTabuleiro();
             verAnterior(c);
-            System.out.println();
-            //System.out.println("Zerou o tabuleiro: ");
+            System.out.println("ERROU");
         }
 
     }
@@ -222,17 +204,66 @@ public class Environment extends SimState {
         lerTabuleiro(b);
     }
     
-    public static void percorreColuna(Queen r){
+    public static void apagaQueenTabuleiro(Queen r){
         int coluna = r.getColuna();
-        int vetor[] = new int[4];
-        
-        for (int l = 0; l < matrizPosicoes.length; l++) {
-            
-                //System.out.print(" " + matrizPosicoes[l][coluna]);
-                vetor[l] = matrizPosicoes[l][coluna];
-                //System.out.println("VETORRRRRRRR"+ vetor);
-                //r.recebeColuna(vetor);
-        }
-        System.out.println();
+        int linha = r.getLinha();
+         
+        matrizTemp[linha][coluna] = 2;
     }
+    
+    public static void copiarMatriz(Queen q, int a[][], int b[][]) {
+        for (int c = 0; c < a.length; c++) {
+            for (int l = 0; l < a.length; l++) {
+               b[l][c] = a[l][c];
+            }
+        }
+         q.setMatrizMemoria(b);            
+    }
+    
+    public static void insercaoBase(Queen q, int a[][], int b[][]) {
+        inserirRainha(q, a);
+        lerTabuleiro(a);
+        verificaColuna(q);
+        verificaLinha(q);
+        verificaDiagonal1(q);
+        verificaDiagonal2(q);
+    }
+    
+    public static void inserirRainha2(Queen q, int matriz[][]) {
+        int l = 0;
+        int c = 0;
+
+        try {
+            for(c = 0; c < matriz.length; c++){
+                if (matriz[l][c] != 0 && c <= matriz.length) {
+                    for(l = 0; l < matriz.length; ) {
+                        if (matriz[l][c] != 0 && c <= matriz.length) {
+                            l++; 
+                        }
+                        q.setLinha(l);
+                        q.setColuna(c);
+                        matriz[l][c] = 1;
+                    }
+                    c++;
+                }
+                q.setLinha(l);
+                q.setColuna(c);
+                matriz[l][c] = 1;
+            }
+        
+ 
+            
+            q.setLinha(l);
+            q.setColuna(c);
+            matriz[l][c] = 1;
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            verAnterior(c);
+            System.out.println("ERROU");
+        }
+
+    }
+    
 }
+
+    

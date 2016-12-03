@@ -12,7 +12,7 @@ public class Queen implements Steppable {
         private int linha;
         private int coluna;
     private boolean conflito = true;
-        private int []colunaAntiga = new int[4];
+        private int [][]colunaAntiga = new int[4][4];
 
         public Queen(){
        
@@ -75,21 +75,21 @@ public class Queen implements Steppable {
         this.conflito = conflito;
     }
     
-    public void recebeColuna(int []b){
+    public void recebeColuna(int [][]b){
        this.colunaAntiga = b;
     }
     
      /**
      * @return the colunaAntiga
      */
-    public int[] getColunaAntiga() {
+    public int[][] getMatrizMemoria() {
         return colunaAntiga;
     }
 
     /**
      * @param colunaAntiga the colunaAntiga to set
      */
-    public void setColunaAntiga(int []colunaAntiga) {
+    public void setMatrizMemoria(int [][]colunaAntiga) {
         this.colunaAntiga = colunaAntiga;
     }
 
