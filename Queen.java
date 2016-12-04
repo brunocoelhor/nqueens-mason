@@ -13,15 +13,28 @@ public class Queen implements Steppable {
         private int coluna;
         private boolean conflito = true;
         private int [][]posicoesVazias = new int[4][4];
-        private int [][]colunaAntiga = new int[4][4];
+        private int [][]colunaAntiga = new int[4][4];  
+        protected static int count = 0;
+
+
 
         public Queen(){
-       
+            
         }
         
         public Queen(int l, int c){
             this.linha = l;
             this.coluna = c;
+        }
+        protected void contador(){
+            count++;
+        }
+        
+        protected void finalize() throws Throwable {
+        count--;
+        } 
+        public static int getInstanceCount() {
+            return count;
         }
 
         public void Queen() {

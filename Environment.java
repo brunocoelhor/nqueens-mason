@@ -11,12 +11,20 @@ public class Environment extends SimState {
 
     public int n = 4; //the number of agents
     public static int[][] matrizPosicoes = new int[4][4];
-    public static int[][] matrizTemp = new int[4][4];
+    public static int[][] matrizTemp1 = new int[4][4];
+    public static int[][] matrizTemp2 = new int[4][4];
+    public static int[][] matrizTemp3 = new int[4][4];
+    public static int[][] matrizTemp4 = new int[4][4];
+    public static int[][] matrizTemp5 = new int[4][4];
+    public static int[][] matrizTemp6 = new int[4][4];
+    public static int[][] matrizTemp7 = new int[4][4];
+    public static int[][] matrizTemp8 = new int[4][4];
     //public static Queen bruno = new Queen();
     //public static Queen miguel = new Queen();
     public static Queen q1 = new Queen();
     public static Queen q2 = new Queen();
     public static Queen q3 = new Queen();
+    public static Queen q4 = new Queen();
 
     public Environment(long seed) { //The constructor method
         super(seed);
@@ -53,16 +61,25 @@ public class Environment extends SimState {
         q1.setLinha(0);
         q1.setColuna(0);
         matrizPosicoes[0][0] = 1;
+        
+        copiarMatriz(q1, matrizPosicoes, matrizTemp1);
+        
         verificaColuna(q1);
         verificaLinha(q1);
         verificaDiagonal1(q1);
         verificaDiagonal2(q1);
         lerTabuleiro(matrizPosicoes);
-        copiarMatriz(q1, matrizPosicoes, matrizTemp);
-        //insercaoBase(q1, matrizPosicoes, matrizTemp);
-        insercaoBase(q2, matrizPosicoes, matrizTemp);
-        insercaoBase(q3, matrizPosicoes, matrizTemp);
         
+//        System.out.println("TESTE LER");
+//        lerTabuleiro(q1.getMatrizMemoria());
+
+        //insercaoBase(q1, matrizPosicoes, matrizTemp);
+        System.out.println("Segunda Rainha: ");
+        insercaoBase(q2, matrizPosicoes, matrizTemp2);
+        System.out.println("Terceira Rainha: ");        
+        insercaoBase(q3, matrizPosicoes, matrizTemp3);
+        System.out.println("Quarta Rainha: ");        
+        insercaoBase(q4, matrizPosicoes, matrizTemp4);       
        
     }
 
@@ -169,11 +186,11 @@ public class Environment extends SimState {
         System.out.println();
     }
     
-    public static void apagaQueenTabuleiro(Queen r){
+    public static void apagaQueenTabuleiro(Queen r, int a[][]){
         int coluna = r.getColuna();
         int linha = r.getLinha();
-         
-        matrizTemp[linha][coluna] = 2;
+        //matrizTemp 
+        a[linha][coluna] = 2;
     }
     
     public static void copiarMatriz(Queen q, int a[][], int b[][]) {
@@ -182,13 +199,14 @@ public class Environment extends SimState {
                b[l][c] = a[l][c];
             }
         }
-         q.setMatrizMemoria(b);            
+         q.setMatrizMemoria(b);
+//         System.out.println("TABELA B");
+//         lerTabuleiro(b);
     }
     
     public static void insercaoBase(Queen q, int a[][], int b[][]) {
         //inserirRainha(q, a);
         mostrarVazios(q, a);
-        lerTabuleiro(a);
         copiarMatriz(q, a, b);
         verificaColuna(q);
         verificaLinha(q);
@@ -202,26 +220,35 @@ public class Environment extends SimState {
     
     public static void mostrarVazios(Queen q, int matriz[][]){
         
-        
         int c = q.getColuna() + 1;
         int countConflito = 0;
         try {
             for(int l = 0; l < matriz.length; l++){
                 if (matriz[l][c] == 0){
                     //COLOCAR RAINHA NESSE LUGAR
+
                     q.setLinha(l);
                     q.setColuna(c);
                     matriz[l][c] = 1;
                     break;
                 }else{
                     countConflito ++;
-                    if(countConflito == 4){
+                    if(countConflito >= matriz.length){
+                        matrizPosicoes = matrizTemp2;
+                        System.out.println("LInha"+q2.getLinha()+"Coluna"+q2.getColuna());
+                        apagaQueenTabuleiro(q2, matrizPosicoes);
+                        
+                        insercaoBase(q2, matrizPosicoes, matrizTemp2);
+                        lerTabuleiro(matrizPosicoes);
+                        
                         //AVISAR QUE DEU CONFLITO
-                        System.out.println("AVISAR QUE DEU CONFLITO");
-                        break;
+                        //System.out.println("AVISAR QUE DEU CONFLITO");
+                        
+                        
+                                              
+                        //break;
                     }
                 }
-                
             }         
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("BUGOU");
