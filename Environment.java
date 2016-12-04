@@ -12,8 +12,8 @@ public class Environment extends SimState {
     public int n = 4; //the number of agents
     public static int[][] matrizPosicoes = new int[4][4];
     public static int[][] matrizTemp = new int[4][4];
-    public static Queen bruno = new Queen();
-    public static Queen miguel = new Queen();
+    //public static Queen bruno = new Queen();
+    //public static Queen miguel = new Queen();
     public static Queen q1 = new Queen();
     public static Queen q2 = new Queen();
     public static Queen q3 = new Queen();
@@ -52,12 +52,6 @@ public class Environment extends SimState {
         insercaoBase(q1, matrizPosicoes, matrizTemp);
         insercaoBase(q2, matrizPosicoes, matrizTemp);
         insercaoBase(q3, matrizPosicoes, matrizTemp);
-        
-        
-        
-
-        
-        
         
        
     }
@@ -128,65 +122,31 @@ public class Environment extends SimState {
 
     }
 
-    public static void verVazios() {
-        for (int c = 0; c < matrizPosicoes.length; c++) {
-            for (int l = 0; l < matrizPosicoes.length; l++) {
-                if (matrizPosicoes[l][c] == 0) {
-                    //System.out.println("L= " + l + " C = " + c);
-                    //mVazios[c][l] = l;
-                }
-            }
-            System.out.println("");
-        }
-    }
-
     public static void inserirRainha(Queen q, int matriz[][]) {
         int l = 0;
         int c = 0;
-        System.out.println(q.getLinha());
-        System.out.println(q.getColuna());
 
         try {
-            while (matriz[l][c] != 0 && c < matriz.length-1) {
-                if(q.getLinha() != 0 && q.getColuna() != 0 ){
-                    break;
-                }
+            while (matriz[l][c] != 0 && c < matriz.length) {
+                
                 while (matriz[l][c] != 0 && l < matriz.length-1) {
                     l++;
                 }
-                
-                c++;
+                if(matriz[l][c] == 0) {
+                    break;
+                }
                 l = 0;
+                c++;
             }
             q.setLinha(l);
             q.setColuna(c);
             matriz[l][c] = 1;
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            verAnterior(c);
+            //verAnterior(c);
             System.out.println("ERROU");
         }
 
-    }
-
-    public static void zeraTabuleiro() {
-        System.out.println();
-        for (int m = 0; m < matrizPosicoes.length; m++) {
-            for (int b = 0; b < matrizPosicoes[0].length; b++) {
-                System.out.print(" " + matrizPosicoes[m][b]);
-                matrizPosicoes[m][b] = 0;
-
-            }
-            System.out.println();
-        }
-    }
-
-    public static void verAnterior(int c) {
-        for (int l = 0; l < matrizPosicoes.length; l++) {
-            if(matrizPosicoes[l][c] == 1){
-                System.out.println("L= " + l + " C = " + c);
-            }
-        }
     }
 
     public static void lerTabuleiro( int matriz[][]) {
@@ -197,11 +157,6 @@ public class Environment extends SimState {
             System.out.println();
         }
         System.out.println();
-    }
-    
-    public static void copiarTabuleiro(int a[][], int b[][]){
-        b = a.clone();
-        lerTabuleiro(b);
     }
     
     public static void apagaQueenTabuleiro(Queen r){
@@ -227,42 +182,30 @@ public class Environment extends SimState {
         verificaLinha(q);
         verificaDiagonal1(q);
         verificaDiagonal2(q);
+        mostrarVazios(q, a);
+        lerTabuleiro(a);
     }
     
-    public static void inserirRainha2(Queen q, int matriz[][]) {
-        int l = 0;
-        int c = 0;
 
+    
+    public static void mostrarVazios(Queen q, int matriz[][]){
+        int c = q.getColuna() + 1;
+        System.out.println("MOSTRAR VAZIOS");
         try {
-            for(c = 0; c < matriz.length; c++){
-                if (matriz[l][c] != 0 && c <= matriz.length) {
-                    for(l = 0; l < matriz.length; ) {
-                        if (matriz[l][c] != 0 && c <= matriz.length) {
-                            l++; 
-                        }
-                        q.setLinha(l);
-                        q.setColuna(c);
-                        matriz[l][c] = 1;
-                    }
-                    c++;
+            for(int l = 0; l < matriz.length; l++){
+                if (matriz[l][c] == 0){
+                    System.out.println("Linha"+ l + "Coluna"+ c);
+                }else{
+                    System.out.println("Sem Vazios");
                 }
-                q.setLinha(l);
-                q.setColuna(c);
-                matriz[l][c] = 1;
-            }
-        
- 
-            
-            q.setLinha(l);
-            q.setColuna(c);
-            matriz[l][c] = 1;
-
+            }         
         } catch (ArrayIndexOutOfBoundsException e) {
-            verAnterior(c);
-            System.out.println("ERROU");
+            System.out.println("BUGOU");
         }
 
     }
+    
+    
     
 }
 

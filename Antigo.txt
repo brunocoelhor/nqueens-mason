@@ -94,3 +94,99 @@
 //            verAnterior(c);
 //            System.out.println("ERROU");
 //        }
+
+
+
+for(int i=0; i<100; i++)
+{
+    if(user entered invalid value)
+        break; // breaks out of the for loop
+}
+
+
+ public int[][] ComunicaPosicoes(){
+        int c = this.getColuna() + 1;
+        
+        for(int l = 0; l < this.colunaAntiga.length; l++){
+            if (colunaAntiga[l][c] == 0){
+                
+            }
+        }
+        return posicoesVazias;
+    }
+
+
+
+
+public static void inserirRainha2(Queen q, int matriz[][]) {
+        int l = 0;
+        int c = 0;
+
+        try {
+            for(c = 0; c < matriz.length; c++){
+                if (matriz[l][c] != 0 && c <= matriz.length) {
+                    for(l = 0; l < matriz.length; ) {
+                        if (matriz[l][c] != 0 && c <= matriz.length) {
+                            l++; 
+                        }
+                        q.setLinha(l);
+                        q.setColuna(c);
+                        matriz[l][c] = 1;
+                    }
+                    c++;
+                }
+                q.setLinha(l);
+                q.setColuna(c);
+                matriz[l][c] = 1;
+            }
+        
+ 
+            
+            q.setLinha(l);
+            q.setColuna(c);
+            matriz[l][c] = 1;
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            verAnterior(c);
+            System.out.println("ERROU");
+        }
+
+    }
+
+    public static void copiarTabuleiro(int a[][], int b[][]){
+        b = a.clone();
+        lerTabuleiro(b);
+    }
+
+    public static void verAnterior(int c) {
+        for (int l = 0; l < matrizPosicoes.length; l++) {
+            if(matrizPosicoes[l][c] == 1){
+                System.out.println("L= " + l + " C = " + c);
+            }
+        }
+    }
+
+    public static void zeraTabuleiro() {
+        System.out.println();
+        for (int m = 0; m < matrizPosicoes.length; m++) {
+            for (int b = 0; b < matrizPosicoes[0].length; b++) {
+                System.out.print(" " + matrizPosicoes[m][b]);
+                matrizPosicoes[m][b] = 0;
+
+            }
+            System.out.println();
+        }
+    }
+
+
+    public static void verVazios() {
+        for (int c = 0; c < matrizPosicoes.length; c++) {
+            for (int l = 0; l < matrizPosicoes.length; l++) {
+                if (matrizPosicoes[l][c] == 0) {
+                    //System.out.println("L= " + l + " C = " + c);
+                    //mVazios[c][l] = l;
+                }
+            }
+            System.out.println("");
+        }
+    }

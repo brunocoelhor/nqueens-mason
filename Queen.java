@@ -11,7 +11,8 @@ public class Queen implements Steppable {
    
         private int linha;
         private int coluna;
-    private boolean conflito = true;
+        private boolean conflito = true;
+        private int [][]posicoesVazias = new int[4][4];
         private int [][]colunaAntiga = new int[4][4];
 
         public Queen(){
@@ -92,7 +93,9 @@ public class Queen implements Steppable {
     public void setMatrizMemoria(int [][]colunaAntiga) {
         this.colunaAntiga = colunaAntiga;
     }
-
-     
+    
+    public int[][] getComunicaPosicoes(){
+        return posicoesVazias;
+    }
 
 }
