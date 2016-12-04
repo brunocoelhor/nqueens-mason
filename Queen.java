@@ -1,12 +1,12 @@
 package sim.app.nqueens;
 
-import sim.engine.SimState;
-import sim.engine.Steppable;
+//import sim.engine.SimState;
+//import sim.engine.Steppable;
 /**
  *
  * @author bruno
  */
-public class Queen implements Steppable {
+public class Queen /*implements Steppable*/ {
 
    
         private int linha;
@@ -42,9 +42,9 @@ public class Queen implements Steppable {
     }
         
         
-    public void step(SimState state) {
-        
-    }
+//    public void step(SimState state) {
+//        
+//    }
 
 /**
      * @return the linha
