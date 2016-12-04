@@ -26,11 +26,11 @@ public class Queen implements Steppable {
             this.linha = l;
             this.coluna = c;
         }
-        protected void contador(){
+        protected void contadorMais(){
             count++;
         }
         
-        protected void finalize() throws Throwable {
+        protected void ContadorMenos() {
         count--;
         } 
         public static int getInstanceCount() {

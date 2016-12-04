@@ -19,12 +19,15 @@ public class Environment extends SimState {
     public static int[][] matrizTemp6 = new int[4][4];
     public static int[][] matrizTemp7 = new int[4][4];
     public static int[][] matrizTemp8 = new int[4][4];
-    //public static Queen bruno = new Queen();
-    //public static Queen miguel = new Queen();
+
     public static Queen q1 = new Queen();
     public static Queen q2 = new Queen();
     public static Queen q3 = new Queen();
     public static Queen q4 = new Queen();
+    public static Queen q5 = new Queen();
+    public static Queen q6 = new Queen();
+    public static Queen q7 = new Queen();
+    public static Queen q8 = new Queen();
 
     public Environment(long seed) { //The constructor method
         super(seed);
