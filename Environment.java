@@ -49,7 +49,17 @@ public class Environment extends SimState {
     }
 
     public static void main(String[] args) {
-        insercaoBase(q1, matrizPosicoes, matrizTemp);
+        System.out.println("Primeira Rainha: ");
+        q1.setLinha(0);
+        q1.setColuna(0);
+        matrizPosicoes[0][0] = 1;
+        verificaColuna(q1);
+        verificaLinha(q1);
+        verificaDiagonal1(q1);
+        verificaDiagonal2(q1);
+        lerTabuleiro(matrizPosicoes);
+        copiarMatriz(q1, matrizPosicoes, matrizTemp);
+        //insercaoBase(q1, matrizPosicoes, matrizTemp);
         insercaoBase(q2, matrizPosicoes, matrizTemp);
         insercaoBase(q3, matrizPosicoes, matrizTemp);
         
@@ -176,28 +186,42 @@ public class Environment extends SimState {
     }
     
     public static void insercaoBase(Queen q, int a[][], int b[][]) {
-        inserirRainha(q, a);
+        //inserirRainha(q, a);
+        mostrarVazios(q, a);
         lerTabuleiro(a);
+        copiarMatriz(q, a, b);
         verificaColuna(q);
         verificaLinha(q);
         verificaDiagonal1(q);
         verificaDiagonal2(q);
-        mostrarVazios(q, a);
         lerTabuleiro(a);
+       // mostrarVazios(q, a);
     }
     
-
+    
     
     public static void mostrarVazios(Queen q, int matriz[][]){
+        
+        
         int c = q.getColuna() + 1;
-        System.out.println("MOSTRAR VAZIOS");
+        int countConflito = 0;
         try {
             for(int l = 0; l < matriz.length; l++){
                 if (matriz[l][c] == 0){
-                    System.out.println("Linha"+ l + "Coluna"+ c);
+                    //COLOCAR RAINHA NESSE LUGAR
+                    q.setLinha(l);
+                    q.setColuna(c);
+                    matriz[l][c] = 1;
+                    break;
                 }else{
-                    System.out.println("Sem Vazios");
+                    countConflito ++;
+                    if(countConflito == 4){
+                        //AVISAR QUE DEU CONFLITO
+                        System.out.println("AVISAR QUE DEU CONFLITO");
+                        break;
+                    }
                 }
+                
             }         
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("BUGOU");
