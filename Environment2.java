@@ -7,7 +7,7 @@ package sim.app.nqueens;
 
 import sim.engine.SimState;
 
-public class Environment2 extends SimState {
+public class Environment2 /*extends SimState*/ {
     
     public static int N = 4; //the number of agents
     public int l = 0;
@@ -71,6 +71,16 @@ public class Environment2 extends SimState {
     public static void removerQueen(Queen q, int a[][], int l, int c){
         q.ContadorMenos();
         a[l][c] = 0;
+    }
+    
+    public static void mostrarVazios(Queen q, int matriz[][]){
+        int i;
+        int col = q.getColuna();
+        
+        if (col >= N ){
+            
+        }
+        
     }
     
     //NÃO FUNCIONA
@@ -219,8 +229,8 @@ public class Environment2 extends SimState {
 }
     
       
-    public Environment2(long seed) {
-        super(seed);
-    }
+//    public Environment2(long seed) {
+//        super(seed);
+//    }
     
 }
